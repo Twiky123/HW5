@@ -18,7 +18,7 @@ namespace dz5
             public string[] medicines;
 
            
-            public void FillingsGrandMotherData(string grannyName, int grannyBirthdayYear, string[] grannyIllnesses, string[] grannyMedicines)
+            public void GrandMotherData(string grannyName, int grannyBirthdayYear, string[] grannyIllnesses, string[] grannyMedicines)
             {
                 int todayYear = DateTime.Today.Year;
 
@@ -39,7 +39,7 @@ namespace dz5
         }
 
         
-        static bool DistributionGrandmothersToHospitals(Queue<Grandmother> grandmotherQueue, Stack<Hospital> firstHospitalsStack)
+        static bool GrandmothersToHospitals(Queue<Grandmother> grandmotherQueue, Stack<Hospital> firstHospitalsStack)
         {
             Grandmother granny = grandmotherQueue.Dequeue();
             Stack<Hospital> secondHospitalsStack = new Stack<Hospital>();
@@ -109,9 +109,9 @@ namespace dz5
         }
 
         
-        static void DisplaysHospitalsAndGrandmothersData(Stack<Hospital> hospitalsStack, List<Grandmother> grandmothersList)
+        static void HospitalsAndGrandmothersData(Stack<Hospital> hospitalsStack, List<Grandmother> grandmothersList)
         {
-            Console.WriteLine("{0, 66}", "СПИСОК БОЛЬНИЦ\n");
+            Console.WriteLine("Список больниц");
             Console.WriteLine("{0, 15} {1, 36} {2, 30} {3, 25}\n", "Название", "Список болезней", "Пациентов сейчас", "Пациентов максимум");
 
             Stack<Hospital> hospitals = new Stack<Hospital>(hospitalsStack);
@@ -131,7 +131,7 @@ namespace dz5
 
             Console.WriteLine();
 
-            Console.WriteLine("{0, 66}", "СПИСОК БАБУЛЬ\n");
+            Console.WriteLine("Список бабулек");
             Console.WriteLine("{0, 15} {1, 36} {2, 30} {3, 25}\n", "Имя", "Список болезней", "Список лекарств", "Возраст");
 
             for (int i = 0; i < grandmothersList.Count; i++)
@@ -166,7 +166,7 @@ namespace dz5
             public List<string> graphTraversalPaths;
 
            
-            public void FillingGraphData(Dictionary<char, char[]> graph)
+            public void GraphData(Dictionary<char, char[]> graph)
             {
                 graphVerticesEdges = graph;
                 currentVertex = graph.ElementAt(0).Key;
@@ -217,8 +217,8 @@ namespace dz5
             {
                 Console.WriteLine("Меню задач");
                 Console.WriteLine("Подсказка:\n" +
-                                  "Задание №3. Программа получает бабулек и распределяет их по больницам                                   -   цифра 3\n" +
-                                  "Задание №4. Программа получает граф, обходит его в глубину и выводит кратчайший путь                    -   цифра 4\n" +
+                                  "Задание №3. Программа получает бабулек и распределяет их по больницам                                   -   цифра 1\n" +
+                                  "Задание №4. Программа получает граф, обходит его в глубину и выводит кратчайший путь                    -   цифра 2\n" +
                                   "Закончить выполнение заданий и выйти из программы                                                       -   цифра 0\n");
 
                 Console.Write("Введите номер задания: ");
@@ -266,7 +266,7 @@ namespace dz5
 
                         do
                         {
-                            DisplaysHospitalsAndGrandmothersData(hospitalStack, grandmothersList);
+                            HospitalsAndGrandmothersData(hospitalStack, grandmothersList);
 
                             Grandmother grandmother = new Grandmother();
                             string name;
@@ -285,17 +285,17 @@ namespace dz5
 
                             if (fillingResult)
                             {
-                                grandmother.FillingsGrandMotherData(name, birthdayYear, illnesses, medicines);
+                                grandmother.GrandMotherData(name, birthdayYear, illnesses, medicines);
                                 grandmothersQueue.Enqueue(grandmother);
 
-                                distributionResult = DistributionGrandmothersToHospitals(grandmothersQueue, hospitalStack);
+                                distributionResult = GrandmothersToHospitals(grandmothersQueue, hospitalStack);
 
                                 if (distributionResult)
                                 {
                                     grandmothersList.Add(grandmother);
 
                                     Console.Clear();
-                                    DisplaysHospitalsAndGrandmothersData(hospitalStack, grandmothersList);
+                                    HospitalsAndGrandmothersData(hospitalStack, grandmothersList);
 
                                     Console.WriteLine("Бабулька попаль в больничку");
                                     Console.Write("Чтобы закончить выполнение задания, введите ЗАКОНЧИТЬ. Чтобы продолжить выполнение задания, нажмите Enter: ");
@@ -322,7 +322,7 @@ namespace dz5
                             }
                             else
                             {
-                                Console.WriteLine("Вы ввели некорректные данные. Повторите попытку");
+                                Console.WriteLine("Вы ввели некорректные данные");
                                 Console.Write("Чтобы продолжить нажмите на любую кнопку ");
                                 Console.ReadKey();
                                 Console.Clear();
@@ -352,7 +352,7 @@ namespace dz5
                             {'J', new char[] { 'E' } },
                         };
 
-                        graph.FillingGraphData(graphVerticesEdges);
+                        graph.GraphData(graphVerticesEdges);
                         graph.DepthFirstGraphTraversal();
 
                         minGraphPath = graph.graphTraversalPaths[0];
