@@ -12,12 +12,11 @@ namespace dz5
     {
         struct Grandmother
         {
-            public string name;
-            public int age;
             public string[] illnesses;
             public string[] medicines;
-
-           
+            public string name;
+            public int age;
+            
             public void GrandMotherData(string grannyName, int grannyBirthdayYear, string[] grannyIllnesses, string[] grannyMedicines)
             {
                 int todayYear = DateTime.Today.Year;
@@ -32,10 +31,10 @@ namespace dz5
       
         struct Hospital
         {
-            public string name;
-            public string[] illnesses;
             public int patientsToday;
             public int patientsTotal;
+            public string name;
+            public string[] illnesses;
         }
 
         
