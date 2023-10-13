@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -16,98 +16,98 @@ namespace dz5
             public string[] medicines;
             public string name;
             public int age;
-            
-            public void GrandMotherData(string grannyName, int grannyBirthdayYear, string[] grannyIllnesses, string[] grannyMedicines)
+
+            public void GrandMotherData(string grannyname, int grannybirthdayyear, string[] grannyillnesses, string[] grannymedicines)
             {
                 int todayYear = DateTime.Today.Year;
 
-                name = grannyName;
-                age = todayYear - grannyBirthdayYear;
-                illnesses = grannyIllnesses;
-                medicines = grannyMedicines;
+                name = grannyname;
+                age = todayYear - grannybirthdayyear;
+                illnesses = grannyillnesses;
+                medicines = grannymedicines;
             }
         }
 
-      
+
         struct Hospital
         {
-            public int patientsToday;
-            public int patientsTotal;
+            public int patientstoday;
+            public int patientstotal;
             public string name;
             public string[] illnesses;
         }
 
-        
-        static bool GrandmothersToHospitals(Queue<Grandmother> grandmotherQueue, Stack<Hospital> firstHospitalsStack)
+
+        static bool Grandmothershospitals(Queue<Grandmother> grandmotherqueue, Stack<Hospital> firsthospitals)
         {
-            Grandmother granny = grandmotherQueue.Dequeue();
-            Stack<Hospital> secondHospitalsStack = new Stack<Hospital>();
-            double numberEligibleDiseases = 0;
+            Grandmother granny = grandmotherqueue.Dequeue();
+            Stack<Hospital> secondhospitals = new Stack<Hospital>();
+            double numbereligiblediseases = 0;
 
             if (granny.illnesses.Length == 0)
             {
-                for (int i = 0; i < (firstHospitalsStack.Count + secondHospitalsStack.Count); i++)
+                for (int i = 0; i < (firsthospitals.Count + secondhospitals.Count); i++)
                 {
-                    Hospital hospital = firstHospitalsStack.Pop();
+                    Hospital hospital = firsthospitals.Pop();
 
-                    if (hospital.patientsToday < hospital.patientsTotal)
+                    if (hospital.patientstoday < hospital.patientstotal)
                     {
-                        hospital.patientsToday++;
-                        firstHospitalsStack.Push(hospital);
+                        hospital.patientstoday++;
+                        firsthospitals.Push(hospital);
 
-                        foreach (Hospital unsuitableHospitals in secondHospitalsStack)
+                        foreach (Hospital unsuitableHospitals in secondhospitals)
                         {
-                            firstHospitalsStack.Push(unsuitableHospitals);
+                            firsthospitals.Push(unsuitableHospitals);
                         }
 
                         return true;
                     }
 
-                    secondHospitalsStack.Push(hospital);
+                    secondhospitals.Push(hospital);
                 }
             }
             else
             {
-                for (int i = 0; i < (firstHospitalsStack.Count + secondHospitalsStack.Count); i++)
+                for (int i = 0; i < (firsthospitals.Count + secondhospitals.Count); i++)
                 {
-                    Hospital hospital = firstHospitalsStack.Pop();
+                    Hospital hospital = firsthospitals.Pop();
 
                     foreach (string illness in granny.illnesses)
                     {
                         if (Array.IndexOf(hospital.illnesses, illness.ToLower()) != -1)
                         {
-                            numberEligibleDiseases++;
+                            numbereligiblediseases++;
                         }
                     }
 
-                    if ((numberEligibleDiseases / granny.illnesses.Length * 100) > 50)
+                    if ((numbereligiblediseases / granny.illnesses.Length * 100) > 50)
                     {
-                        if (hospital.patientsToday < hospital.patientsTotal)
+                        if (hospital.patientstoday < hospital.patientstotal)
                         {
-                            hospital.patientsToday++;
-                            firstHospitalsStack.Push(hospital);
+                            hospital.patientstoday++;
+                            firsthospitals.Push(hospital);
 
-                            foreach (Hospital unsuitableHospitals in secondHospitalsStack)
+                            foreach (Hospital unsuitableHospitals in secondhospitals)
                             {
-                                firstHospitalsStack.Push(unsuitableHospitals);
+                                firsthospitals.Push(unsuitableHospitals);
                             }
 
                             return true;
                         }
                     }
 
-                    secondHospitalsStack.Push(hospital);
+                    secondhospitals.Push(hospital);
                 }
             }
 
-            foreach (Hospital unsuitableHospitals in secondHospitalsStack)
+            foreach (Hospital unsuitableHospitals in secondhospitals)
             {
-                firstHospitalsStack.Push(unsuitableHospitals);
+                firsthospitals.Push(unsuitableHospitals);
             }
             return false;
         }
 
-        
+
         static void HospitalsAndGrandmothersData(Stack<Hospital> hospitalsStack, List<Grandmother> grandmothersList)
         {
             Console.WriteLine("Список больниц");
@@ -125,7 +125,7 @@ namespace dz5
                     illnesses += hospital.illnesses[j] + " ";
                 }
 
-                Console.WriteLine("{0, 15} {1, 37} {2, 29} {3, 25}", hospital.name, illnesses, hospital.patientsToday, hospital.patientsTotal);
+                Console.WriteLine("{0, 15} {1, 37} {2, 29} {3, 25}", hospital.name, illnesses, hospital.patientstoday, hospital.patientstotal);
             }
 
             Console.WriteLine();
@@ -155,7 +155,7 @@ namespace dz5
             Console.WriteLine();
         }
 
-       
+
         struct Graph
         {
             public Dictionary<char, char[]> graphVerticesEdges;
@@ -164,7 +164,7 @@ namespace dz5
             public string curentGraphTraversalPath;
             public List<string> graphTraversalPaths;
 
-           
+
             public void GraphData(Dictionary<char, char[]> graph)
             {
                 graphVerticesEdges = graph;
@@ -174,7 +174,7 @@ namespace dz5
                 graphTraversalPaths = new List<string>();
             }
 
-           
+
             public void DepthFirstGraphTraversal()
             {
                 if (graphVerticesEdges[currentVertex].Length == 1)
@@ -226,13 +226,13 @@ namespace dz5
                 switch (taskNumber)
                 {
                     case "1":
-                        
+
 
                     case "2":
-                        
-                       
+
+
                     case "3":
-                        
+
                         Console.Clear();
                         Console.WriteLine("Задание 3");
 
@@ -245,22 +245,22 @@ namespace dz5
                         Hospital firstHospital = new Hospital();
                         firstHospital.name = "Северная";
                         firstHospital.illnesses = new string[] { "ангина", "простуда", "грипп", "спина" };
-                        firstHospital.patientsToday = 0;
-                        firstHospital.patientsTotal = 2;
+                        firstHospital.patientstoday = 0;
+                        firstHospital.patientstotal = 2;
                         hospitalStack.Push(firstHospital);
 
                         Hospital secondHospital = new Hospital();
                         secondHospital.name = "Южная";
                         secondHospital.illnesses = new string[] { "нога", "простуда", "горло", "голова" };
-                        secondHospital.patientsToday = 0;
-                        secondHospital.patientsTotal = 5;
+                        secondHospital.patientstoday = 0;
+                        secondHospital.patientstotal = 5;
                         hospitalStack.Push(secondHospital);
 
                         Hospital thirdHospital = new Hospital();
                         thirdHospital.name = "Центральная";
                         thirdHospital.illnesses = new string[] { "шея", "голова", "ангина", "грипп" };
-                        thirdHospital.patientsToday = 0;
-                        thirdHospital.patientsTotal = 3;
+                        thirdHospital.patientstoday = 0;
+                        thirdHospital.patientstotal = 3;
                         hospitalStack.Push(thirdHospital);
 
                         do
@@ -287,7 +287,7 @@ namespace dz5
                                 grandmother.GrandMotherData(name, birthdayYear, illnesses, medicines);
                                 grandmothersQueue.Enqueue(grandmother);
 
-                                distributionResult = GrandmothersToHospitals(grandmothersQueue, hospitalStack);
+                                distributionResult = Grandmothershospitals(grandmothersQueue, hospitalStack);
 
                                 if (distributionResult)
                                 {
@@ -330,7 +330,7 @@ namespace dz5
                         break;
 
                     case "4":
-                        
+
                         Console.Clear();
                         Console.WriteLine("Задание 4");
 
